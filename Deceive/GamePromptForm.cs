@@ -17,6 +17,8 @@ internal partial class GamePromptForm : Form
 
     private void OnValorantLaunch(object sender, EventArgs e) => HandleLaunchChoiceAsync(LaunchGame.VALORANT);
 
+    private void OnLionLaunch(object sender, EventArgs e) => HandleLaunchChoiceAsync(LaunchGame.Lion);
+
     private void OnRiotClientLaunch(object sender, EventArgs e) => HandleLaunchChoiceAsync(LaunchGame.RiotClient);
 
     private void HandleLaunchChoiceAsync(LaunchGame game)

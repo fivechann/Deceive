@@ -43,7 +43,7 @@ internal class ProxiedConnection
         try
         {
             int byteCount;
-            var bytes = new byte[8192];
+            var bytes = new byte[8192 * 2];
 
             do
             {
@@ -91,7 +91,7 @@ internal class ProxiedConnection
         try
         {
             int byteCount;
-            var bytes = new byte[8192];
+            var bytes = new byte[8192 * 2];
 
             do
             {
@@ -181,6 +181,13 @@ internal class ProxiedConnection
 
                 // Remove Legends of Runeterra presence
                 presence.Element("games")?.Element("bacon")?.Remove();
+                
+                // Remove 2XKO presence
+                presence.Element("games")?.Element("lion")?.Remove();
+
+                // Remove Riot Client presence
+                presence.Element("games")?.Element("keystone")?.Remove();
+                presence.Element("games")?.Element("riot_client")?.Remove();
 
                 // Extracts current VALORANT from the user's own presence, so that we can show a fake
                 // player with the proper version and avoid "Version Mismatch" from being shown.
@@ -195,7 +202,7 @@ internal class ProxiedConnection
                     {
                         var valorantPresence = Encoding.UTF8.GetString(Convert.FromBase64String(valorantBase64));
                         var valorantJson = JsonSerializer.Deserialize<JsonNode>(valorantPresence);
-                        ValorantVersion = valorantJson?["partyClientVersion"]?.GetValue<string>();
+                        ValorantVersion = valorantJson?["partyPresenceData"]?["partyClientVersion"]?.GetValue<string>();
                         Trace.WriteLine("Found VALORANT version: " + ValorantVersion);
                         // only resend
                         if (InsertedFakePlayer && ValorantVersion is not null)

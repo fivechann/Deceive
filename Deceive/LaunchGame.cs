@@ -19,6 +19,11 @@ public enum LaunchGame
     ///     Attempt to start VALORANT.
     /// </summary>
     VALORANT,
+    
+    /// <summary>
+    ///     Attempt to launch Lion (2XKO).
+    /// </summary>
+    Lion,
 
     /// <summary>
     ///     Attempt to launch the Riot Client.
